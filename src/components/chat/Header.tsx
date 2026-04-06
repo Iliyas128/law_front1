@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, Shield, Trash2, ArrowLeft, Users, Briefcase } from "lucide-react";
+import { Moon, Sun, Shield, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { ResponseMode } from "@/lib/mockApi";
 
 interface HeaderProps {
   onClearHistory?: () => void;
-  mode?: ResponseMode;
 }
 
-export function Header({ onClearHistory, mode = "citizen" }: HeaderProps) {
+export function Header({ onClearHistory }: HeaderProps) {
   const navigate = useNavigate();
   const [dark, setDark] = useState(() => {
     if (typeof window !== "undefined") {
@@ -23,9 +21,6 @@ export function Header({ onClearHistory, mode = "citizen" }: HeaderProps) {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
-  const ModeIcon = mode === "official" ? Briefcase : Users;
-  const modeLabel = mode === "official" ? "Официальный" : "Гражданский";
-
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-4">
@@ -37,10 +32,6 @@ export function Header({ onClearHistory, mode = "citizen" }: HeaderProps) {
           <span className="text-lg font-bold text-foreground hidden sm:inline">Знай свои права</span>
         </div>
         <div className="flex items-center gap-1">
-          <div className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-2.5 py-1 mr-1">
-            <ModeIcon className="h-3 w-3 text-primary" />
-            <span className="text-xs font-medium text-muted-foreground">{modeLabel}</span>
-          </div>
           {onClearHistory && (
             <Button variant="ghost" size="icon" onClick={onClearHistory} title="Очистить чат">
               <Trash2 className="h-4 w-4" />

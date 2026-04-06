@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import type { SourceDetail } from "@/lib/mockApi";
 
 export interface Message {
   id: string;
@@ -6,6 +7,8 @@ export interface Message {
   content: string;
   law?: string;
   article?: string;
+  sources?: SourceDetail[];
+  needs_clarification?: boolean;
   timestamp: number;
 }
 
@@ -13,7 +16,7 @@ function buildStorageKey(scope: string) {
   return `znaj-svoi-prava-chat:${scope}`;
 }
 
-export function useChatHistory(scope = "citizen") {
+export function useChatHistory(scope = "default") {
   const storageKey = buildStorageKey(scope);
   const [messages, setMessages] = useState<Message[]>([]);
 

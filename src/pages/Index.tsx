@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Shield, ArrowRight, Scale, MessageCircle, Smartphone, Briefcase, Users } from "lucide-react";
+import { Shield, ArrowRight, Scale, MessageCircle, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Index() {
@@ -18,42 +18,15 @@ export default function Index() {
         AI-помощник по законам Казахстана при взаимодействии с полицией и ДПС
       </p>
 
-      <p className="text-sm font-semibold text-foreground mb-4">Выберите режим:</p>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg w-full mb-12">
-        <button
-          onClick={() => navigate("/chat?mode=citizen")}
-          className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-border bg-card p-6 transition-all hover:border-primary hover:shadow-lg"
-        >
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20">
-            <Users className="h-7 w-7 text-primary" />
-          </div>
-          <h3 className="text-base font-bold text-foreground">Я гражданин</h3>
-          <p className="text-xs text-muted-foreground text-center">
-            Простым языком — понятные ответы без юридического жаргона
-          </p>
-          <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-        </button>
-
-        <button
-          onClick={() => navigate("/chat?mode=official")}
-          className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-border bg-card p-6 transition-all hover:border-primary hover:shadow-lg"
-        >
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20">
-            <Briefcase className="h-7 w-7 text-primary" />
-          </div>
-          <h3 className="text-base font-bold text-foreground">Я госслужащий</h3>
-          <p className="text-xs text-muted-foreground text-center">
-            Официальный стиль — с точными формулировками и ссылками на НПА
-          </p>
-          <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-        </button>
-      </div>
+      <Button size="lg" className="mb-12 rounded-2xl px-8" onClick={() => navigate("/chat")}>
+        Начать чат
+        <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl w-full">
         {[
           { icon: Scale, title: "Законы РК", desc: "Ответы на основе актуального законодательства" },
-          { icon: MessageCircle, title: "Два формата", desc: "Простой язык для граждан, официальный — для служащих" },
+          { icon: MessageCircle, title: "Проверка релевантности", desc: "Несколько фрагментов и отбор лучших для ответа" },
           { icon: Smartphone, title: "Всегда под рукой", desc: "Работает на любом устройстве — телефоне или компьютере" },
         ].map((f) => (
           <div key={f.title} className="flex flex-col items-center text-center rounded-2xl border border-border bg-card p-6">
